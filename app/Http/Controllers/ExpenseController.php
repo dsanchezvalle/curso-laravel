@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Expense;
 use App\ExpenseReport;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class ExpenseController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create(ExpenseReport $expenseReport)
     {
@@ -33,11 +34,20 @@ class ExpenseController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(Request $request, ExpenseReport $expenseReport)
     {
-        dd($request ->all());
+        $expense = new Expense();
+        $expense->description = $request->get('description');
+        $expense->amount = $request->get('amount');
+        $expense->expense_report_id = $expenseReport ->id;
+        $expense->save();
+
+        //return redirect('/expense_reports/'.$expenseReport->id);
+        return redirect(route('expense_reports.show', $expenseReport));
+
+        //dd($request ->all());
     }
 
     /**

@@ -3,7 +3,7 @@
 @section ('content')
     <div class="row">
         <div class="col">
-            <h1>New report</h1>
+            <h1>Send report</h1>
         </div>
     </div>
     <div class="row">
@@ -21,13 +21,13 @@
                     @endforeach
                 </div>
             @endif
-            <form action="/expense_reports" method="POST">
+            <form action="/expense_reports/{{$report->id}}/sendEmail" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Type a title" value="{{old('title')}}">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Type an email" value="{{old('email')}}">
                 </div>
-                <button class="btn btn-primary" type="submit"> Submit </button>
+                <button class="btn btn-primary" type="submit"> Send email </button>
             </form>
         </div>
     </div>

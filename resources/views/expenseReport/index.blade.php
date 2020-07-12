@@ -1,6 +1,7 @@
-@extends ('layouts.base')
+@extends ('layouts.app')
 
 @section ('content')
+<div class="container">
     <div class="row">
         <div class="col">
             <h1>Reports</h1>
@@ -11,7 +12,6 @@
             <a class="btn btn-primary" href="/expense_reports/create">Create a new report</a>
         </div>
     </div>
-<div class="row">
     <div class="col">
         <table class="table">
             @foreach ($expenseReports as $expenseReport)
@@ -25,7 +25,6 @@
         </table>
     </div>
 </div>
-        </div>
-    </div>
+
 @endsection
 
